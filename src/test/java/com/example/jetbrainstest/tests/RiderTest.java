@@ -1,26 +1,20 @@
-package com.example.jetbrainstest.tests;
-import org.junit.jupiter.api.AfterEach;
+import com.example.jetbrainstest.tests.BaseTest;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import java.time.Duration;
-public class RiderTest extends BaseTest{
-    private static WebDriver driver;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+public class RiderTest extends BaseTest {
+    private RiderPage RiderPage;
     @BeforeEach
-    public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        // Fix the issue https://github.com/SeleniumHQ/selenium/issues/11750
-        options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-    }
-    public static WebDriver getDriver(){
-        return driver;
-    }
-    @AfterEach
-    public void tearDown() {
-        driver.quit();
-    }
+    @Override
+    Public void(){
+        super.setUp();
+        getDriver().get("https://www.jetbrains.com/idea/");
+        RiderPage= new RiderPage(getDriver());
+        @Test
+                @DisplayName("Проверка, Что кнопка скачивания активна")
+        public void buttjnCheck(){
+            assertTrue(RiderPage.checkIfDownloadButtonIsClickable(), "Кнопкаскачивая не активна");
+        }
+
 }
